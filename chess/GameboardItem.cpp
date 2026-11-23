@@ -36,9 +36,9 @@ void GameboardItem::draw(sf::RenderWindow& window) {
 	// determine pixel offset to draw the item at (based on board offset & board position)
 	// 
 	// TODO: uncomment the rest of this line once Points can be added together!
-	Point pos = pBoard->getTopLeftOffset(); // +Point(position.getX() * pBoard->getSquareWidth(), position.getY() * pBoard->getSquareHeight());
+	Point pos = pBoard->getTopLeftOffset() + Point(position.getX() * pBoard->getSquareWidth(), position.getY() * pBoard->getSquareHeight());
 
 	// place the sprite there and then draw it
-	pSprite->setPosition( sf::Vector2f(pos.getX(), pos.getY()) );  // this would be nicer if we could use an implict conversion to convert Point to sf::Vector2f
+	pSprite->setPosition( pos );  // this would be nicer if we could use an implict conversion to convert Point to sf::Vector2f
 	window.draw(*pSprite);	
 }

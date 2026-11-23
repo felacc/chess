@@ -14,13 +14,18 @@ class Gameboard;	// prevent circular references
 
 // Use these class definitions as a starting point for creating your concrete classes.
 
-//class King : public ChessPiece {
-//public:
-//	King(Color col);
-//};
+class King : public ChessPiece {
+public:
+	King(Color col);
+	~King();
 
-//class Knight : public ChessPiece {
-//public:
-//	Knight(Color col);
-//};
+	std::vector<Point> getValidMoves() const override;
+};
+
+class Knight : public ChessPiece {
+public:
+	Knight(Color col);
+
+	std::vector<Point> getValidMoves() const override;
+};
 

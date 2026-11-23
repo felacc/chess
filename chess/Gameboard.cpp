@@ -47,7 +47,7 @@ void Gameboard::drawActiveChessPieceHighlights(sf::RenderWindow& window, const C
         std::vector<Point> validMoves;
 
         // TODO: Comment this line in once getValidMoves() has been implemented in concrete ChessPiece classes.
-        //validMoves = pActiveChessPiece->getValidMoves();
+        validMoves = pActiveChessPiece->getValidMoves();
 
         for (auto& validMoveLoc : validMoves) {
             drawSquare(window, validMoveLoc, Constants::colorPotentialMove);
@@ -70,18 +70,16 @@ void Gameboard::drawGameboardItems(sf::RenderWindow& window) const
 void Gameboard::drawSquare(sf::RenderWindow& window, const Point& boardLoc, const sf::Color& color) const {   
     // Use a sf::Vector2f to store the square width & height 
     // This is the SFML equivalent of our Point class - except it uses floats
-    sf::Vector2f squareSize(static_cast<float>(squareWidth), static_cast<float>(squareHeight));
-    sf::RectangleShape square( squareSize );
+    sf::RectangleShape square( Point(squareWidth, squareHeight) );
     square.setFillColor(color);
 
     // determine the pixel location that we want to draw a square at
     int pixelX = topLeftOffset.getX() + (boardLoc.getX() * squareWidth);
     int pixelY = topLeftOffset.getY() + (boardLoc.getY() * squareHeight);
-          
+    Point pixelPos{ pixelX, pixelY };
     // Use a sf::Vector2f to store the X,Y values 
     // This is the SFML equivalent of our Point class - except it uses floats
-    sf::Vector2f newPos(static_cast<float>(pixelX), static_cast<float>(pixelY));
-    square.setPosition(newPos);   
+    square.setPosition(pixelPos);   
     window.draw(square);
 }
 
@@ -132,15 +130,17 @@ void Gameboard::captureItem(const Point& squareLoc) {
     }
 }
 
-//bool Gameboard::containsBlockerAt(const Point& squareLoc) const {   
-//    // TODO
-//    return false;
-//}
+bool Gameboard::containsBlockerAt(const Point& squareLoc) const {   
+    GameboardItem* pItem = getItem(squareLoc);
+
+    return dynamic_cast<Blocker*>(pItem) != nullptr;
+}
 //
-//bool Gameboard::containsChessPieceOfColorAt(const Point& squareLoc, ChessPiece::Color color) const {
-//    // TODO
-//    return false;
-//}
+bool Gameboard::containsChessPieceOfColorAt(const Point& squareLoc, ChessPiece::Color color) const {
+    ChessPiece* pPiece = dynamic_cast<ChessPiece*>(getItem(squareLoc));
+
+    return pPiece != nullptr && pPiece->getColor() == color;
+}
 
 
 

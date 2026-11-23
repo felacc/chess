@@ -13,6 +13,10 @@ public:
 	// constructor
 	Point(int x = 0, int y = 0) : x{ x }, y{ y } {}
 
+	// overload typecasts
+	operator sf::Vector2i() const { return sf::Vector2i{ x, y }; }
+	operator sf::Vector2f() const { return sf::Vector2f{ static_cast<float>(x), static_cast<float>(y)}; }
+
 	// setters
 	void setX(int x) { this->x = x; };
 	void setY(int y) { this->y = y; };

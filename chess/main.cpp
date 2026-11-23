@@ -14,7 +14,7 @@ int main()
 {
     _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 
-    //TestSuite::runTestSuite();
+    TestSuite::runTestSuite();
 
     try {
         sf::RenderWindow window(sf::VideoMode({ 750, 750 }), " Chess Demo");
@@ -23,9 +23,10 @@ int main()
         ChessGame game;
 
         // TODO: comment these in once derived classes are concrete.
-        //game.addItemToBoard(new Blocker(), { 3,1 });
-        //game.addItemToBoard(new King(ChessPiece::Color::black), { 4,0 });
-        //game.addItemToBoard(new Knight(ChessPiece::Color::white), {1,0});
+        game.addItemToBoard(new Blocker(), { 3,1 });
+        game.addItemToBoard(new King(ChessPiece::Color::black), { 4,0 });
+        game.addItemToBoard(new Knight(ChessPiece::Color::white), {1,0});
+        game.addItemToBoard(new Knight(ChessPiece::Color::black), { 2, 0 });
 
       
         while (window.isOpen())

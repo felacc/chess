@@ -22,3 +22,44 @@ std::string ChessPiece::getImageFilepath() {
 	ss << "_" << name << ".png";
 	return ss.str();
 }
+
+bool ChessPiece::isValidMove(Point& p) const
+{
+	std::cout << "point p: " << p << '\n';
+	for (auto move : getValidMoves())
+	{
+		std::cout << "move: " << move << '\n';
+		if (move == p)
+			return true;
+	}
+
+	return false;
+}
+
+std::vector<Point> ChessPiece::convertOffsetsToValidMoves(const std::vector<Point>& offsets) const
+{
+	
+	std::vector<Point> validMoves{};
+
+	if (pBoard) // if chess piece is on the board
+	{
+		for (const Point& p : offsets)
+		{
+			Point destination = p + getPosition();
+
+			if (!(pBoard->isValid(destination)))
+				continue;
+
+			if (pBoard->containsBlockerAt(destination))
+				continue;
+
+			if (pBoard->containsChessPieceOfColorAt(destination, color))
+				continue;
+
+			validMoves.push_back(destination);
+		}
+	}
+
+	return validMoves;
+}
+

@@ -4,6 +4,7 @@
 #include "GameboardItem.h"
 #include <vector>
 #include <sstream>
+#include "Point.h"
 
 class Gameboard;
 
@@ -29,10 +30,16 @@ public:
 	// get the image filepath (of the chess piece)
 	std::string getImageFilepath() override;
 
+	virtual std::vector<Point> getValidMoves() const = 0;
+
+	bool isValidMove(Point& p) const;
 
 	// STATIC ---------- //	
 	// get the opposite color of the color passed in
 	static Color getOppositeColor(Color col) {
 		return col == Color::white ? Color::black : Color::white;
 	}	
+
+	std::vector<Point> convertOffsetsToValidMoves(const std::vector<Point>& offsets) const;
+
 };

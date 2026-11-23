@@ -86,8 +86,43 @@ void ChessGame::update(const std::optional<sf::Event>& event) {
             GameboardItem* pItemClicked = board.getItem(clickedBoardLoc);
 
             // If so, check if the clicked item is a chess piece (dynamic_cast it)
-                       
-            // TODO
+            
+            ChessPiece* pPieceClicked = dynamic_cast<ChessPiece*>(pItemClicked);
+
+            // Check if piece is clicked, either set active, or check for capture
+            if (pPieceClicked)
+            {
+                if (!pActiveChessPiece)
+                {
+                    setActiveChessPiece(pPieceClicked);
+                    return;
+                }
+               
+               
+                if (pActiveChessPiece->isValidMove(clickedBoardLoc))
+				{
+					board.captureItem(clickedBoardLoc);
+					moveActiveChessPiece(clickedBoardLoc);
+				}
+
+				clearActiveChessPiece();
+                
+            }
+            
+            // if not piece clicked
+            if (!pPieceClicked)
+            {
+                if (pActiveChessPiece)
+                {
+                    if (pActiveChessPiece->isValidMove(clickedBoardLoc))
+                    {
+                        moveActiveChessPiece(clickedBoardLoc);
+                    }
+                }
+                clearActiveChessPiece();
+            }
+    
+            
 
             // Need to handle 2 main scenarios:
             // 1) There is no current active chess piece
@@ -98,7 +133,6 @@ void ChessGame::update(const std::optional<sf::Event>& event) {
             //         (via board.captureItem()) and then move there (via moveActiveChessPiece()).
             //      b) otherwise clear the active chess piece    
                
-            // TODO
         }
     }
 }
