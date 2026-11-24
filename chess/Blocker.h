@@ -13,5 +13,10 @@ public:
 	Blocker();
 
 	// get the image filename
-	std::string getImageFilepath() override;		
+	std::string getImageFilepath() override;
+
+	std::string toString() const
+	{
+		return "#";
+	}
 };

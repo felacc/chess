@@ -5,11 +5,12 @@
 #include "ChessPiece.h"
 #include "Point.h"
 #include "Constants.h"
+#include "ISerializable.h"
 
 class GameboardItem;
 
 
-class Gameboard {
+class Gameboard: public ISerializable {
 
 private:
     static const int MAX_X = 8;		// gameboard x dimension
@@ -92,7 +93,25 @@ public:
     // return true if there is a chess piece at the given loc with the specified color. (false otherwise)
     bool containsChessPieceOfColorAt(const Point& squareLoc, ChessPiece::Color color) const;
     // TODO:
-     
+    
+    std::string toString() const
+    {
+        std::string s{};
+        for (int y{ 0 }; y < MAX_Y; y++)
+        {
+            for (int x{ 0 }; x < MAX_X; x++)
+            {
+                GameboardItem* item = getItem(Point(x, y));
+                if (item)
+                    s += item->toString();
+                else
+                    s += '.';
+            }
+            s += '\n';
+        }
+
+        return s;
+    }
     
     // This is a helper method that can be used to find valid moves from a starting point and heading 
     // in a certain direction.  If you wanted to attempt implmenting Rook/Queen/Bishop, you could make

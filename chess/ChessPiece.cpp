@@ -23,7 +23,7 @@ std::string ChessPiece::getImageFilepath() {
 	return ss.str();
 }
 
-bool ChessPiece::isValidMove(Point& p) const
+bool ChessPiece::isValidMove(const Point& p) const
 {
 	std::cout << "point p: " << p << '\n';
 	for (auto move : getValidMoves())

@@ -32,7 +32,7 @@ public:
 
 	virtual std::vector<Point> getValidMoves() const = 0;
 
-	bool isValidMove(Point& p) const;
+	bool isValidMove(const Point& p) const;
 
 	// STATIC ---------- //	
 	// get the opposite color of the color passed in

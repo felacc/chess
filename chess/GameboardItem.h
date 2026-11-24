@@ -3,6 +3,7 @@
 #include "SFML\Graphics.hpp"
 #include <iostream>
 #include "Point.h"
+#include "ISerializable.h"
 
   
 // If Gameboard.h #includes GameboardItem.h, and GameboardItem.h #includes Gameboard.h this causes
@@ -19,7 +20,7 @@
 class Gameboard;
 
 
-class GameboardItem {
+class GameboardItem : public ISerializable {
 protected: 
 	std::string name;					// name of the item (used to form the image filename,
 										// and to output debug info)

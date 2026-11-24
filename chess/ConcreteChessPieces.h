@@ -20,6 +20,11 @@ public:
 	~King();
 
 	std::vector<Point> getValidMoves() const override;
+
+	std::string toString() const
+	{
+		return "K";
+	}
 };
 
 class Knight : public ChessPiece {
@@ -27,5 +32,10 @@ public:
 	Knight(Color col);
 
 	std::vector<Point> getValidMoves() const override;
+
+	std::string toString() const
+	{
+		return "k";
+	}
 };
 

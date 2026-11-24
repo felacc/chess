@@ -143,9 +143,9 @@ void ChessGame::saveToFile(const char* filename)
     std::ofstream saveFile(filename = "save.txt");
     if (saveFile) {
         // TODO: once Chessboard implements ISerializable, comment this next line back in.
-        //saveFile << board.toString();
-        //std::cout << "saving to file: " << filename << "\n";
-        //std::cout << board.toString() << "\n";
+        saveFile << board.toString();
+        std::cout << "saving to file: " << filename << "\n";
+        std::cout << board.toString() << "\n";
         saveFile.close();
     }
     else {

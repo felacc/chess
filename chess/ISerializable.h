@@ -2,6 +2,9 @@
 #include <string>
 class ISerializable
 {
-	virtual std::string toString() = 0; 
+public:
+	virtual ~ISerializable() = default;
+
+	virtual std::string toString() const = 0; 
 };
 
